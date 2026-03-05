@@ -38,3 +38,29 @@ form h2 {
 .form-control .btn:hover {
   background: #0e7490;
 }
+.form-control {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#grocery {
+  flex: 1;
+  padding: 0.6rem;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+}
+
+.submit-btn {
+  background: #06b6d4;
+  border: none;
+  padding: 0.6rem 1rem;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background: #0891b2;
+}

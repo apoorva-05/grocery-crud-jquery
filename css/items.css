@@ -4,13 +4,12 @@
   gap: 20px;
 }
 .clear-btn {
-  margin-top: 1rem;
-  background: transparent;
+  margin-top: 1.5rem;
   border: none;
+  background: transparent;
   color: #ef4444;
-  font-size: 1rem;
+  font-weight: bold;
   cursor: pointer;
-  font-weight: 600;
 }
 
 .clear-btn:hover {
