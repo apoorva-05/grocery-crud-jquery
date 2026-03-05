@@ -1,47 +1,34 @@
-export function createForm(addItem, updateItem) {
-  const form = document.createElement("form");
-  form.id = "grocery-form";
+// Create Form Element
+function createForm() {
+  var $form = $("<form></form>");
 
-  form.innerHTML = `
-    <input 
-      type="text" 
-      id="grocery-input" 
-      placeholder="Enter grocery item" 
-      required 
-    />
-    <button type="submit">Add</button>
-  `;
+  $form.html(`
+    <h2>grocery bud</h2>
+    <div class="form-control">
+      <input
+        type="text"
+        class="form-input"
+        placeholder="e.g. eggs"
+      />
+      <button type="submit" class="btn">
+        add item
+      </button>
+    </div>
+  `);
 
-  let editMode = false;
-  let editId = null;
-
-  const input = form.querySelector("#grocery-input");
-  const button = form.querySelector("button");
-
-  form.addEventListener("submit", (e) => {
+  $form.on("submit", function (e) {
     e.preventDefault();
+    var $input = $form.find(".form-input");
+    var value = $.trim($input.val());
 
-    const value = input.value.trim();
-    if (!value) return;
-
-    if (editMode) {
-      updateItem(editId, value);
-      editMode = false;
-      editId = null;
-      button.textContent = "Add";
-    } else {
-      addItem(value);
+    if (!value) {
+      alert("Please provide value");
+      return;
     }
 
-    input.value = "";
+    addItem(value);
+    $input.val("");
   });
 
-  function startEdit(item) {
-    input.value = item.name;
-    editMode = true;
-    editId = item.id;
-    button.textContent = "Update";
-  }
-
-  return { form, startEdit };
+  return $form;
 }
