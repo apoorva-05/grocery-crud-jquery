@@ -1,5 +1,18 @@
-.items{
-display:flex;
-flex-direction:column;
-gap:20px;
+.items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.clear-btn {
+  margin-top: 1rem;
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.clear-btn:hover {
+  color: #b91c1c;
 }
