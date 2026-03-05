@@ -1,4 +1,51 @@
-var items = groceryItems;
+// Local Storage Functions
+function getLocalStorage() {
+  var list = localStorage.getItem("grocery-list");
+  if (list) {
+    return JSON.parse(list);
+  }
+  return [];
+}
+
+function setLocalStorage(itemsArray) {
+  localStorage.setItem("grocery-list", JSON.stringify(itemsArray));
+}
+
+// Initialize items from local storage
+var items = getLocalStorage();
+var editId = null;
+
+// ....
+
+// Add Item Function
+function addItem(itemName) {
+  // ....
+  setLocalStorage(items);
+  render();
+}
+
+// Edit Completed Function
+function editCompleted(itemId) {
+  // ....
+  setLocalStorage(items);
+  render();
+}
+
+// Remove Item Function
+function removeItem(itemId) {
+  items = $.grep(items, function (item) {
+    return item.id !== itemId;
+  });
+  setLocalStorage(items);
+  render();
+}
+
+// Update Item Name Function
+function updateItemName(newName) {
+  // ....
+  setLocalStorage(items);
+  render();
+}
 
 // Render App
 function render() {
@@ -67,5 +114,54 @@ function addItem(itemName) {
 
   setTimeout(function () {
     alert("Item Added Successfully!");
+  }, 0);
+}
+var editId = null;
+
+// Render App
+function render() {
+  var $app = $("#app");
+  $app.empty();
+
+  var itemToEdit = editId
+    ? $.grep(items, function (item) {
+        return item.id === editId;
+      })[0]
+    : null;
+  var $formElement = createForm(editId, itemToEdit); // edited line
+  var $itemsElement = createItems(items);
+
+  $app.append($formElement);
+  $app.append($itemsElement);
+}
+
+// Initialize App
+$(document).ready(function () {
+  render();
+});
+
+// Update Item Name Function
+function updateItemName(newName) {
+  items = $.map(items, function (item) {
+    if (item.id === editId) {
+      return $.extend({}, item, { name: newName });
+    }
+    return item;
+  });
+  editId = null;
+  render();
+  setTimeout(function () {
+    alert("Item Updated Successfully!");
+  }, 0);
+}
+
+// Set Edit ID Function
+function setEditId(itemId) {
+  editId = itemId;
+  render();
+
+  // Focus input after render
+  setTimeout(function () {
+    $(".form-input").focus();
   }, 0);
 }
